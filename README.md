@@ -1,33 +1,46 @@
-# 🚀 Project Nexus — Multi-User Project Management Dashboard
+<div align="center">
 
-A full-stack **Mini CRM / Project Management** application with clean separation between **backend** (Node.js + Express + MongoDB) and **frontend** (React + Vite SPA + TanStack Router). Features JWT authentication, role-based access control, drag-and-drop Kanban boards, and real-time task management.
+# ⚡ Project Nexus
+
+### Multi-User Project Management Dashboard
+
+*Built exclusively for ❤️ [RefreshKid](https://refreshkid.com/)*
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-nexusweb--eight.vercel.app-6366f1?style=for-the-badge&logo=vercel)](https://nexusweb-eight.vercel.app)
+---
+
+A full-stack **Mini CRM & Project Management** platform with JWT authentication,
+role-based access, drag-and-drop Kanban boards, and real-time task tracking —
+cleanly separated into `backend/` and `frontend/`.
+
+</div>
 
 ---
-Live- https://nexusweb-eight.vercel.app
 
 ## 📁 Project Structure
 
 ```
-nexus-final/
-├── backend/                  # Node.js + Express REST API
+nexus/
+│
+├── backend/                        # Node.js + Express REST API
 │   ├── src/
-│   │   ├── config/           # Database connection, seeder
-│   │   ├── controllers/      # Route handlers (auth, tasks, projects, dashboard, users)
-│   │   ├── middleware/       # JWT auth guard, error handler
-│   │   ├── models/           # Mongoose schemas (User, Project, Task)
-│   │   ├── routes/           # Express routers
-│   │   └── utils/            # AppError, catchAsync, JWT helpers, Zod validators
+│   │   ├── config/                 # DB connection & data seeder
+│   │   ├── controllers/            # auth · tasks · projects · dashboard · users
+│   │   ├── middleware/             # JWT auth guard · global error handler
+│   │   ├── models/                 # Mongoose schemas (User, Project, Task)
+│   │   ├── routes/                 # Express routers
+│   │   └── utils/                  # AppError · catchAsync · JWT · Zod validators
 │   ├── .env.example
 │   └── package.json
 │
-├── frontend/                 # React SPA (Vite + TanStack Router)
+├── frontend/                       # React SPA — Vite + TanStack Router
 │   ├── src/
-│   │   ├── components/       # Reusable UI (TaskModal, ProjectModal, Sidebar, etc.)
-│   │   ├── hooks/            # Custom React hooks
-│   │   ├── lib/              # API client, Zustand store, types, format utils
-│   │   └── routes/           # File-based routing (dashboard, tasks, projects, team)
-│   ├── index.html            # SPA entry point
-│   ├── vercel.json           # Vercel SPA routing config
+│   │   ├── components/             # TaskModal · ProjectModal · Sidebar · FAB …
+│   │   ├── hooks/                  # Custom React hooks
+│   │   ├── lib/                    # API client · Zustand store · types · utils
+│   │   └── routes/                 # File-based pages (dashboard · tasks · projects · team)
+│   ├── index.html                  # SPA entry point
+│   ├── vercel.json                 # SPA routing rewrites for Vercel
 │   ├── vite.config.ts
 │   ├── tsconfig.json
 │   ├── .env.example
@@ -40,137 +53,224 @@ nexus-final/
 
 ## ✨ Features
 
-- 🔐 **Authentication** — Signup, login, logout with JWT
-- 🏠 **Dashboard** — Stats, recent projects, upcoming tasks
-- 📋 **Tasks** — Full CRUD with Kanban (drag & drop) and Table views
-- 📁 **Projects** — Create, update, delete with color coding and member management
-- 👥 **Team** — View team members; Admin can manage roles
-- 🔍 **Search & Filter** — Filter tasks by project, assignee, priority
-- 📄 **Pagination** — Server-side pagination on all list endpoints
-- 🛡️ **Role-Based Access** — `ADMIN` sees all; `USER` sees only their data
-- 🎨 **Dark/Light Theme** — System-aware with manual toggle
-- 📱 **Responsive Design** — Mobile-friendly with bottom nav and FAB
+| | Feature | Description |
+|---|---|---|
+| 🔐 | **Authentication** | Signup · Login · Logout with JWT |
+| 🏠 | **Dashboard** | Live stats, recent projects, upcoming tasks |
+| 📋 | **Task Management** | Full CRUD · Kanban board (drag & drop) · Table view |
+| 📁 | **Projects** | Create · Update · Delete · Color coding · Members |
+| 👥 | **Team** | Member directory · Admin role management |
+| 🔍 | **Search & Filter** | Filter by project · assignee · priority · keyword |
+| 📄 | **Pagination** | Server-side pagination across all list endpoints |
+| 🛡️ | **Role-Based Access** | `ADMIN` sees all · `USER` scoped to their data |
+| 🎨 | **Theme** | Dark / Light · System-aware with manual toggle |
+| 📱 | **Responsive** | Mobile-friendly with bottom nav and floating action button |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer       | Technology                                               |
-|-------------|----------------------------------------------------------|
-| Frontend    | React 19, Vite, TanStack Router, Zustand, react-hook-form |
-| UI          | Tailwind CSS, shadcn/ui, Radix UI, Framer Motion        |
-| Drag & Drop | @dnd-kit/core                                            |
-| Backend     | Node.js, Express, TypeScript                             |
-| Database    | MongoDB with Mongoose ODM                                |
-| Auth        | JWT (jsonwebtoken), bcryptjs                             |
-| Validation  | Zod (frontend + backend)                                 |
-| Security    | Helmet, CORS, express-rate-limit, express-mongo-sanitize |
+### Frontend
+| Technology | Purpose |
+|---|---|
+| React 19 + Vite | UI framework & build tool |
+| TanStack Router | File-based client-side routing |
+| Zustand | Global auth & user state |
+| react-hook-form + Zod | Form handling & validation |
+| Tailwind CSS + shadcn/ui | Styling & component library |
+| Radix UI + Framer Motion | Accessible primitives & animations |
+| @dnd-kit | Drag-and-drop Kanban board |
+
+### Backend
+| Technology | Purpose |
+|---|---|
+| Node.js + Express + TypeScript | REST API server |
+| MongoDB + Mongoose | Database & ODM |
+| JWT + bcryptjs | Authentication & password hashing |
+| Zod | Request validation (body + query) |
+| Helmet + CORS + express-rate-limit | Security hardening |
+| express-mongo-sanitize | NoSQL injection prevention |
+
+---
+
+## 🏗️ Architecture
+
+```
+┌──────────────────────────────────────────────────────┐
+│              frontend/  (React + Vite SPA)           │
+│                                                      │
+│   TanStack Router  ──►  Pages & Layouts              │
+│   Zustand Store    ──►  Auth & User State            │
+│   API Client       ──►  Fetch + JWT Authorization    │
+└───────────────────────────┬──────────────────────────┘
+                            │  HTTPS · JWT Bearer Token
+┌───────────────────────────▼──────────────────────────┐
+│              backend/  (Express + Node.js + TS)      │
+│                                                      │
+│   Routes  ──►  Auth Middleware  ──►  Controllers     │
+│   Zod validation on every request (body + query)    │
+│   AppError + catchAsync  ──►  Unified error handler  │
+│   Rate limiting · Helmet · Mongo sanitize            │
+└───────────────────────────┬──────────────────────────┘
+                            │  Mongoose ODM
+┌───────────────────────────▼──────────────────────────┐
+│                       MongoDB                        │
+│                                                      │
+│   Collections:  users  ·  projects  ·  tasks         │
+│   Compound indexes for fast filtered queries         │
+│   Proper relationships & referential integrity       │
+└──────────────────────────────────────────────────────┘
+```
 
 ---
 
 ## ⚡ Quick Start (Local)
 
 ### Prerequisites
-- **Node.js** ≥ 18 · **MongoDB** running locally · **npm** ≥ 9
+> Node.js ≥ 18 · MongoDB running locally · npm ≥ 9
 
-### 1. Backend
+### 1. Clone
+
+```bash
+git clone https://github.com/anika0520/Nexus-web.git
+cd nexus
+```
+
+### 2. Backend
 
 ```bash
 cd backend
-cp .env.example .env   # fill in your values
-npm install
-npm run dev            # http://localhost:5000
+cp .env.example .env
 ```
 
-### 2. Frontend
+```env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/project-nexus
+JWT_SECRET=your-secret-here
+JWT_EXPIRES_IN=7d
+JWT_COOKIE_EXPIRES_IN=7
+CLIENT_URL=http://localhost:5173
+RATE_LIMIT_MAX=200
+```
 
 ```bash
-cd frontend
-cp .env.example .env   # set VITE_API_URL
 npm install
-npm run dev            # http://localhost:5173
+npm run dev        # → http://localhost:5000
 ```
 
-**Default credentials** (auto-seeded):
+### 3. Frontend
+
+```bash
+cd ../frontend
+cp .env.example .env
 ```
-Admin:  admin@nexus.dev  /  Admin123
-User:   alice@nexus.dev  /  User123!
+
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
+
+```bash
+npm install
+npm run dev        # → http://localhost:5173
+```
+
+### 4. Default Credentials *(auto-seeded on first run)*
+
+```
+👑 Admin    admin@nexus.dev   /   Admin123
+👤 User     alice@nexus.dev   /   User123
 ```
 
 ---
 
 ## 🌐 API Reference
 
-Base URL: `https://nexus-017a.onrender.com/api/v1`
+**Base URL:** `https://nexus-017a.onrender.com/api/v1`
 
-### Auth
+### 🔐 Authentication
 | Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | /auth/signup | Register | No |
-| POST | /auth/login | Login + JWT | No |
-| POST | /auth/logout | Logout | Yes |
-| GET  | /auth/me | Current user | Yes |
+|--------|----------|-------------|:----:|
+| `POST` | `/auth/signup` | Register new user | — |
+| `POST` | `/auth/login` | Login & receive JWT | — |
+| `POST` | `/auth/logout` | Logout | ✓ |
+| `GET` | `/auth/me` | Get current user | ✓ |
 
-### Projects
+### 📁 Projects
 | Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | /projects | List (paginated) | Yes |
-| POST | /projects | Create | Yes |
-| GET | /projects/:id | Get one | Yes |
-| PUT | /projects/:id | Update | Yes (owner) |
-| DELETE | /projects/:id | Delete | Yes (owner/admin) |
-| GET | /projects/:id/tasks | List tasks | Yes |
+|--------|----------|-------------|:----:|
+| `GET` | `/projects` | List projects (paginated) | ✓ |
+| `POST` | `/projects` | Create project | ✓ |
+| `GET` | `/projects/:id` | Get single project | ✓ |
+| `PUT` | `/projects/:id` | Update project | ✓ owner |
+| `DELETE` | `/projects/:id` | Delete project | ✓ owner/admin |
+| `GET` | `/projects/:id/tasks` | List tasks in project | ✓ |
 
-### Tasks
+### 📋 Tasks
 | Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | /tasks | List (paginated) | Yes |
-| POST | /tasks | Create | Yes |
-| GET | /tasks/:id | Get one | Yes |
-| PUT | /tasks/:id | Update | Yes |
-| DELETE | /tasks/:id | Delete | Yes (creator/admin) |
-| PATCH | /tasks/:id/status | Update status | Yes |
+|--------|----------|-------------|:----:|
+| `GET` | `/tasks` | List tasks (paginated) | ✓ |
+| `POST` | `/tasks` | Create task | ✓ |
+| `GET` | `/tasks/:id` | Get single task | ✓ |
+| `PUT` | `/tasks/:id` | Update task | ✓ |
+| `DELETE` | `/tasks/:id` | Delete task | ✓ creator/admin |
+| `PATCH` | `/tasks/:id/status` | Update status & order | ✓ |
 
-### Other
+### 📊 Dashboard & Users
 | Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | /dashboard/stats | Stats + summaries | Yes |
-| GET | /users | All users | Admin only |
-| GET | /users/assignable | Users for assignment | Yes |
+|--------|----------|-------------|:----:|
+| `GET` | `/dashboard/stats` | Stats + summaries | ✓ |
+| `GET` | `/users` | List all users | ✓ admin |
+| `GET` | `/users/assignable` | Users for task assignment | ✓ |
 
 ---
 
 ## 🗄️ Database Schema
 
-**Users:** `_id, name, email, password (bcrypt), role (ADMIN|USER), avatarColor`
+### Users
+```
+_id · name · email (unique) · password (bcrypt) · role (ADMIN|USER) · avatarColor
+```
 
-**Projects:** `_id, title, description, status, color, startDate, endDate, ownerId → User, memberIds → [User]`
+### Projects
+```
+_id · title · description · status (active|on_hold|completed|archived)
+color · startDate · endDate · ownerId → User · memberIds → [User]
+```
+*Indexes: `(ownerId, status)` · text index on `(title, description)`*
 
-**Tasks:** `_id, title, description, status, priority, dueDate, projectId → Project, assigneeId → User, createdById → User, order`
-
-Compound indexes on `(projectId, status)`, `(assigneeId, status)`, `(dueDate, status)`.
+### Tasks
+```
+_id · title · description · status (todo|in_progress|review|done)
+priority (low|medium|high|urgent) · dueDate · order
+projectId → Project · assigneeId → User · createdById → User
+```
+*Indexes: `(projectId, status)` · `(assigneeId, status)` · `(dueDate, status)`*
 
 ---
 
 ## 📦 Scripts
 
-### Backend (`cd backend`)
+### Backend
 ```bash
-npm run dev     # dev server with hot reload
-npm run build   # compile TypeScript
-npm start       # run production build
+npm run dev      # Dev server with hot reload (tsx watch)
+npm run build    # Compile TypeScript → dist/
+npm start        # Run compiled production build
+npm run lint     # ESLint
 ```
 
-### Frontend (`cd frontend`)
+### Frontend
 ```bash
-npm run dev     # Vite dev server → http://localhost:5173
-npm run build   # production build → dist/
-npm run preview # preview production build
+npm run dev      # Vite dev server → http://localhost:5173
+npm run build    # Production build → dist/
+npm run preview  # Preview production build locally
+npm run lint     # ESLint
+npm run format   # Prettier
 ```
 
+<div align="center">
 
----
 
-## 📄 License
+MIT License
 
-MIT
+</div>
