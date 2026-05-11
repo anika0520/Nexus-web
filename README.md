@@ -1,8 +1,9 @@
 # 🚀 Project Nexus — Multi-User Project Management Dashboard
 
-A full-stack **Mini CRM / Project Management** application with clean separation between **backend** (Node.js + Express + MongoDB) and **frontend** (React + Vite SPA + TanStack Router).
+A full-stack **Mini CRM / Project Management** application with clean separation between **backend** (Node.js + Express + MongoDB) and **frontend** (React + Vite SPA + TanStack Router). Features JWT authentication, role-based access control, drag-and-drop Kanban boards, and real-time task management.
 
 ---
+Live- https://nexusweb-eight.vercel.app
 
 ## 📁 Project Structure
 
@@ -92,7 +93,7 @@ npm run dev            # http://localhost:5173
 
 **Default credentials** (auto-seeded):
 ```
-Admin:  admin@nexus.dev  /  Admin123!
+Admin:  admin@nexus.dev  /  Admin123
 User:   alice@nexus.dev  /  User123!
 ```
 
@@ -151,34 +152,6 @@ Compound indexes on `(projectId, status)`, `(assigneeId, status)`, `(dueDate, st
 
 ---
 
-## 🚀 Deployment
-
-### Backend — Render (already deployed)
-
-Live at: **https://nexus-017a.onrender.com**
-
-To redeploy:
-1. Push `backend/` changes to GitHub
-2. Render auto-deploys on push
-3. Required env vars: `MONGODB_URI`, `JWT_SECRET`, `CLIENT_URL` (your Vercel URL), `NODE_ENV=production`
-
-### Frontend — Vercel
-
-1. Push to GitHub
-2. Import project in Vercel → set **Root Directory** to `frontend`
-3. Framework preset: **Vite**
-4. Build command: `npm run build`
-5. Output directory: `dist`
-6. Add environment variable:
-   ```
-   VITE_API_URL = https://nexus-017a.onrender.com/api/v1
-   ```
-7. Deploy ✓
-
-> The `vercel.json` in `frontend/` automatically handles SPA client-side routing so page refreshes don't 404.
-
----
-
 ## 📦 Scripts
 
 ### Backend (`cd backend`)
@@ -195,17 +168,6 @@ npm run build   # production build → dist/
 npm run preview # preview production build
 ```
 
----
-
-## 🐛 Bug Fixes Applied
-
-| Issue | Fix |
-|-------|-----|
-| "Failed to load tasks" on tasks page | Backend pagination `max(100)` rejected frontend's `limit: 200` — raised to 500 |
-| Tasks created via FAB not appearing in Tasks page | Dispatch `nexus:task-created` event from FAB; tasks page listens and refetches |
-| Tasks created by user missing from their list | `getTasks` now also scopes by `createdById` |
-| Dashboard didn't refresh after task creation | Dashboard listens for `nexus:task-created` event |
-| Vercel deployment showed 404 NOT_FOUND | Removed TanStack Start SSR/Cloudflare build; converted to standard Vite SPA with `vercel.json` rewrite rule |
 
 ---
 
