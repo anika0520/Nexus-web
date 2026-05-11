@@ -178,7 +178,7 @@ npm run dev        # → http://localhost:5173
 ### 4. Default Credentials *(auto-seeded on first run)*
 
 ```
-👑 Admin    admin@nexus.dev   /   Admin123
+👑 Admin    admin@nexus.com   /   Admin123
 👤 User     alice@nexus.dev   /   User123
 ```
 
@@ -269,8 +269,5 @@ npm run format   # Prettier
 ```
 
 <div align="center">
-
-
-MIT License
 
 </div>
